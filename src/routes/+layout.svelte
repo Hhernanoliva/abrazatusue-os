@@ -8,7 +8,7 @@
 	let { children } = $props();
 
 	$effect(() => {
-		const lenis = new Lenis();
+		const lenis = new Lenis({ lerp: 0.15 });
 
 		const tick = (time = 0) => {
 			lenis.raf(time);
