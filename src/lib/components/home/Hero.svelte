@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import { animate } from 'animejs';
 
+	// @ts-ignore
 	const heroReveal = (el) => {
 		animate(el, {
 			opacity: [0, 1],
