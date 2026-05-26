@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
 	import { animate } from 'animejs';
 
-	const heroReveal = (el: HTMLElement) => {
+	const heroReveal = (el) => {
 		animate(el, {
 			opacity: [0, 1],
 			translateY: [20, 0],
