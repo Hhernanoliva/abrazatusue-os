@@ -1,2 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+:root {
+  --color-blush: #F2B5C0;
+  --color-rose-gold: #E8A98A;
+  --color-cream: #F7EDE0;
+  --color-white-soft: #FDFAF7;
+  --color-ocre: #C49A3C;
+  --color-brown: #6B4226;
+  --color-gray-warm: #9C8E84;
+
+  --font-brand: 'Dancing Script', cursive;
+  --font-title: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--color-white-soft);
+  color: var(--color-brown);
+}
+
+body {
+  overflow-x: hidden;
+}
