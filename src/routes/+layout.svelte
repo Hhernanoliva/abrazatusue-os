@@ -10,7 +10,7 @@
 	$effect(() => {
 		const lenis = new Lenis();
 
-		function raf(time) {
+		function raf(time: number) {
 			lenis.raf(time);
 			requestAnimationFrame(raf);
 		}
