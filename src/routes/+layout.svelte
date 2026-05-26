@@ -10,11 +10,11 @@
 	$effect(() => {
 		const lenis = new Lenis();
 
-		function raf(time: number) {
+		const tick = (time = 0) => {
 			lenis.raf(time);
-			requestAnimationFrame(raf);
-		}
-		const id = requestAnimationFrame(raf);
+			requestAnimationFrame(tick);
+		};
+		const id = requestAnimationFrame(tick);
 
 		return () => {
 			lenis.destroy();
