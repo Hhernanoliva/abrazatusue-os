@@ -4,6 +4,12 @@
 - **Package Manager**: pnpm
 - **Add-ons**: prettier, tailwindcss, mcp
 
+## Git Workflow
+
+- Rama principal: `master` (no `main`)
+- Trabajar siempre en `master` directamente — sin feature branches
+- Sin remote configurado aún (repo local)
+
 ---
 
 You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
