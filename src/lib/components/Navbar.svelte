@@ -7,26 +7,25 @@
 	];
 </script>
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-white-soft)] border-b border-[var(--color-blush)]/30" style="transform: translateZ(0); will-change: transform;">
-	<nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-		<!-- Logo -->
-		<a href="/" class="flex items-center">
-			<!-- Reemplazar con <img src="/logo.svg" alt="Abraza Tus Sueños" class="h-10" /> cuando llegue el logo -->
-			<span
-				class="text-xl font-bold tracking-widest uppercase text-[var(--color-brown)]"
-				style="font-family: var(--font-body);"
-			>
+<header
+	class="fixed top-0 right-0 left-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-white-soft)]"
+	style="transform: translateZ(0);"
+>
+	<nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+		<a href="/" class="flex items-center transition-transform duration-200 active:scale-[0.97]">
+			<!-- TODO: <img src="/logo.svg" alt="Abraza Tus Sueños" class="h-9" /> cuando llegue el logo en SVG -->
+			<span class="text-lg font-bold tracking-[0.18em] text-[var(--color-brown)] uppercase">
 				Abraza Tus Sueños
 			</span>
 		</a>
 
 		<!-- Links desktop -->
-		<ul class="hidden md:flex items-center gap-8">
+		<ul class="hidden items-center gap-8 md:flex">
 			{#each links as link}
 				<li>
 					<a
 						href={link.href}
-						class="text-sm font-semibold tracking-widest uppercase text-[var(--color-brown)] hover:text-[var(--color-ocre)] transition-colors duration-200"
+						class="inline-flex items-center py-2 text-sm font-semibold tracking-widest text-[var(--color-brown)] uppercase transition-colors duration-200 hover:text-[var(--color-cta)]"
 					>
 						{link.label}
 					</a>
@@ -36,26 +35,39 @@
 
 		<!-- Hamburger mobile -->
 		<button
-			class="md:hidden flex flex-col gap-1.5 p-2"
+			class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
 			onclick={() => (menuOpen = !menuOpen)}
-			aria-label="Abrir menú"
+			aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+			aria-expanded={menuOpen}
 		>
-			<span class="block w-6 h-0.5 bg-[var(--color-brown)] transition-all duration-200"></span>
-			<span class="block w-6 h-0.5 bg-[var(--color-brown)] transition-all duration-200"></span>
-			<span class="block w-6 h-0.5 bg-[var(--color-brown)] transition-all duration-200"></span>
+			<span
+				class="block h-0.5 w-6 bg-[var(--color-brown)] transition-all duration-300 {menuOpen
+					? 'translate-y-2 rotate-45'
+					: ''}"
+			></span>
+			<span
+				class="block h-0.5 w-6 bg-[var(--color-brown)] transition-all duration-300 {menuOpen
+					? 'opacity-0'
+					: ''}"
+			></span>
+			<span
+				class="block h-0.5 w-6 bg-[var(--color-brown)] transition-all duration-300 {menuOpen
+					? '-translate-y-2 -rotate-45'
+					: ''}"
+			></span>
 		</button>
 	</nav>
 
 	<!-- Mobile menu -->
 	{#if menuOpen}
-		<div class="md:hidden bg-[var(--color-white-soft)] border-t border-[var(--color-blush)]/30 px-6 py-4">
+		<div class="border-t border-[var(--color-border)] bg-[var(--color-white-soft)] px-6 py-4 md:hidden">
 			<ul class="flex flex-col gap-4">
 				{#each links as link}
 					<li>
 						<a
 							href={link.href}
 							onclick={() => (menuOpen = false)}
-							class="block text-sm font-semibold tracking-widest uppercase text-[var(--color-brown)] hover:text-[var(--color-ocre)] transition-colors duration-200"
+							class="block py-2 text-sm font-semibold tracking-widest text-[var(--color-brown)] uppercase transition-colors duration-200 hover:text-[var(--color-cta)]"
 						>
 							{link.label}
 						</a>

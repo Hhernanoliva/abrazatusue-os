@@ -1,74 +1,105 @@
 <script lang="ts">
-	import { animate } from 'animejs';
+	import { reveal, magnetic } from '$lib/attachments';
+	import { scroll, scrollToId } from '$lib/scroll.svelte';
+	import Figura from '$lib/components/Figura.svelte';
 
-	// @ts-ignore
-	const heroReveal = (el) => {
-		animate(el, {
-			opacity: [0, 1],
-			translateY: [20, 0],
-			duration: 1000,
-			ease: 'outCubic',
-			delay: 300
-		});
-	};
+	// Parallax de la foto: pipeline Lenis -> $state -> $derived -> transform.
+	let scrollY = $state(0);
+	let parallax = $derived(scrollY * 0.12);
+
+	$effect(() => {
+		const lenis = scroll.lenis;
+		if (!lenis) return;
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		const onScroll = (e: { scroll: number }) => (scrollY = e.scroll);
+		lenis.on('scroll', onScroll);
+		return () => lenis.off('scroll', onScroll);
+	});
+
+	// Horario del día (calculado al cargar). 0=Dom ... 6=Sáb.
+	const dia = new Date().getDay();
+	const horarioHoy =
+		dia === 1 || dia === 2
+			? 'Hoy cerrado'
+			: dia === 0 || dia === 6
+				? 'Hoy 9:30–13:00 · 16:00–20:00'
+				: 'Hoy 9:00–12:30 · 16:00–19:00';
 </script>
 
 <section
-	class="relative flex items-center justify-center min-h-[100svh] bg-[var(--color-cream)] overflow-hidden"
+	class="relative grid min-h-[100svh] grid-cols-1 items-center gap-8 overflow-hidden bg-[var(--color-cream)] pt-24 md:grid-cols-2 md:gap-0 md:pt-0 md:pb-0"
 >
-	<!-- Placeholder imagen: reemplazar con <img> cuando llegue foto del local -->
+	<!-- Texto (izquierda) -->
 	<div
-		class="absolute inset-0 bg-gradient-to-b from-[var(--color-rose-gold)]/30 to-[var(--color-brown)]/60"
-	></div>
-
-	<!-- Overlay de textura placeholder -->
-	<div
-		class="absolute inset-0 opacity-20"
-		style="background-image: radial-gradient(circle at 30% 40%, var(--color-blush) 0%, transparent 60%), radial-gradient(circle at 70% 60%, var(--color-rose-gold) 0%, transparent 50%);"
-	></div>
-
-	<!-- Contenido -->
-	<div
-		{@attach heroReveal}
-		class="relative z-10 text-center px-6 max-w-2xl mx-auto"
+		{@attach reveal({ y: 28, duration: 900 })}
+		class="relative z-10 px-6 sm:px-10 md:py-24 md:pl-[max(2rem,6vw)] md:pr-12"
 	>
-		<!-- Logo placeholder: reemplazar con <img src="/logo.svg" ... /> -->
-		<div class="mb-8">
-			<p
-				class="text-sm font-semibold tracking-[0.3em] uppercase text-[var(--color-white-soft)] opacity-80 mb-3"
-			>
-				Pastelería Artesanal
-			</p>
-			<h1
-				class="text-5xl md:text-7xl text-[var(--color-white-soft)] leading-tight"
-				style="font-family: var(--font-brand);"
-			>
-				Abraza Tus Sueños
-			</h1>
-		</div>
-
 		<p
-			class="text-lg md:text-xl text-[var(--color-white-soft)] opacity-90 leading-relaxed"
+			class="mb-5 text-xs font-semibold tracking-[0.3em] text-[var(--color-gray-warm)] uppercase"
+		>
+			Pastelería artesanal · Las Flores
+		</p>
+
+		<h1
+			class="text-4xl leading-[1.08] font-medium tracking-tight text-[var(--color-brown)] sm:text-5xl md:text-6xl"
 			style="font-family: var(--font-title);"
 		>
-			Donde cada bocado es un abrazo
-		</p>
+			Sentí el sabor como era antes.<br />
+			<span class="text-[var(--color-rose-gold)]">Real, como en casa.</span>
+		</h1>
 
-		<p class="text-sm text-[var(--color-white-soft)] opacity-60 mt-3 tracking-wide">
-			Las Flores · Buenos Aires
-		</p>
-	</div>
-
-	<!-- Scroll indicator -->
-	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
-		<span class="text-xs tracking-widest uppercase text-[var(--color-white-soft)]">Descubrí</span>
-		<svg
-			class="w-4 h-4 text-[var(--color-white-soft)] animate-bounce"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
+		<p
+			class="mt-6 max-w-md text-base leading-relaxed text-[var(--color-brown)]/80 md:text-lg"
 		>
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-		</svg>
+			Pastelería artesanal y café en Las Flores. Todo hecho con nuestras manos, fresco del día.
+		</p>
+
+		<div class="mt-9 flex flex-col items-start gap-4">
+			<span class="inline-block" {@attach magnetic({ strength: 0.35 })}>
+				<button
+					type="button"
+					onclick={() => scrollToId('#horarios')}
+					class="rounded-full bg-[var(--color-cta)] px-8 py-3.5 text-sm font-semibold tracking-wider text-white uppercase shadow-[var(--shadow-soft)] transition-[background-color,box-shadow] duration-250 hover:bg-[var(--color-cta-hover)] hover:shadow-[var(--shadow-lift)] active:scale-[0.98]"
+				>
+					Vení a visitarnos
+				</button>
+			</span>
+
+			<p class="text-sm tracking-wide text-[var(--color-gray-warm)]">
+				Rivadavia 493, Las Flores · {horarioHoy}
+			</p>
+		</div>
 	</div>
+
+	<!-- Foto (derecha) -->
+	<div class="relative h-96 w-full self-stretch overflow-hidden sm:h-[28rem] md:h-full">
+		<!-- Capa con parallax. Foto real: <Figura src="/hero-local.jpg" alt="..." eager /> -->
+		<div
+			class="absolute inset-x-0 top-[-10%] h-[120%]"
+			style="transform: translateY({parallax}px); will-change: transform;"
+		>
+			<Figura
+				src="/hero.webp"
+				alt="Mesa con café y pastelería en Abraza Tus Sueños"
+				eager
+				gradient="radial-gradient(120% 80% at 70% 30%, var(--color-blush) 0%, transparent 55%), radial-gradient(100% 90% at 30% 80%, var(--color-rose-gold) 0%, transparent 60%), linear-gradient(160deg, #fbe7df 0%, var(--color-cream) 100%)"
+			/>
+		</div>
+
+		<!-- Fade suave hacia el texto, angosto -->
+		<div
+			class="pointer-events-none absolute inset-y-0 left-0 hidden w-20 bg-gradient-to-r from-[var(--color-cream)] to-transparent md:block"
+		></div>
+		<div
+			class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[var(--color-cream)] to-transparent md:hidden"
+		></div>
+		<div
+			class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--color-cream)] to-transparent md:hidden"
+		></div>
+	</div>
+
+	<!-- Bridge mobile: fundido cream → white-soft hacia la siguiente sección -->
+	<div
+		class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-20 bg-gradient-to-b from-transparent to-[var(--color-white-soft)] md:hidden"
+	></div>
 </section>

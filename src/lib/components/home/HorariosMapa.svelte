@@ -1,70 +1,65 @@
 <script lang="ts">
-	import { animate } from 'animejs';
+	import { reveal } from '$lib/attachments';
+
+	const dia = new Date().getDay(); // 0=Dom ... 6=Sáb
 
 	const horarios = [
-		{ dias: 'Miércoles a Viernes', manana: '9:00 – 12:30', tarde: '16:00 – 19:00' },
-		{ dias: 'Sábados y Domingos', manana: '9:30 – 13:00', tarde: '16:00 – 20:00' },
-		{ dias: 'Lunes y Martes', manana: 'Cerrado', tarde: 'Cerrado' }
+		{ dias: 'Miércoles a Viernes', manana: '9:00 – 12:30', tarde: '16:00 – 19:00', grupo: [3, 4, 5] },
+		{ dias: 'Sábados y Domingos', manana: '9:30 – 13:00', tarde: '16:00 – 20:00', grupo: [6, 0] },
+		{ dias: 'Lunes y Martes', manana: 'Cerrado', tarde: '', grupo: [1, 2] }
 	];
-
-	// @ts-ignore
-	const fadeUp = (el) => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					animate(el, {
-						opacity: [0, 1],
-						translateY: [30, 0],
-						duration: 700,
-						ease: 'outCubic'
-					});
-					observer.disconnect();
-				}
-			},
-			{ threshold: 0.15 }
-		);
-		observer.observe(el);
-		return () => observer.disconnect();
-	};
 </script>
 
-<section class="py-20 px-6 bg-[var(--color-white-soft)]">
-	<div class="max-w-6xl mx-auto">
-		<!-- Título -->
-		<div {@attach fadeUp} class="text-center mb-14">
-			<p class="text-xs font-semibold tracking-[0.3em] uppercase text-[var(--color-gray-warm)] mb-3">
+<section id="horarios" class="relative z-[2] bg-[var(--color-white-soft)] px-6 py-20 md:py-28">
+	<div class="mx-auto max-w-6xl">
+		<div {@attach reveal()} class="mb-14 text-center">
+			<p class="mb-3 text-xs font-semibold tracking-[0.3em] text-[var(--color-gray-warm)] uppercase">
 				Dónde encontrarnos
 			</p>
 			<h2
-				class="text-3xl md:text-4xl text-[var(--color-brown)]"
+				class="mb-4 text-3xl font-medium tracking-tight text-[var(--color-brown)] md:text-4xl"
 				style="font-family: var(--font-title);"
 			>
 				Vení a visitarnos
 			</h2>
+			<p class="mx-auto max-w-xl text-base leading-relaxed text-[var(--color-brown)]/75">
+				Te esperamos con un cafecito. Cerramos lunes y martes para descansar y volver con todo.
+			</p>
 		</div>
 
-		<div class="flex flex-col md:flex-row gap-12">
+		<div class="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
 			<!-- Horarios -->
-			<div {@attach fadeUp} class="w-full md:w-1/2" style="opacity: 0;">
+			<div {@attach reveal({ delay: 100 })}>
 				<h3
-					class="text-lg font-semibold text-[var(--color-brown)] mb-6 tracking-wide"
+					class="mb-6 text-lg font-medium tracking-tight text-[var(--color-brown)]"
 					style="font-family: var(--font-title);"
 				>
 					Horarios de atención
 				</h3>
 
-				<div class="space-y-4">
+				<div>
 					{#each horarios as h}
+						{@const esHoy = h.grupo.includes(dia)}
 						<div
-							class="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 border-b border-[var(--color-blush)]/40 last:border-0"
+							class="flex flex-col border-b border-[var(--color-border)] py-4 last:border-0 sm:flex-row sm:items-center sm:justify-between {esHoy
+								? 'rounded-xl bg-[var(--color-blush)]/15 px-4'
+								: ''}"
 						>
-							<span class="font-semibold text-[var(--color-brown)] text-sm">{h.dias}</span>
+							<span class="flex items-center gap-2 text-sm font-semibold text-[var(--color-brown)]">
+								{h.dias}
+								{#if esHoy}
+									<span
+										class="rounded-full bg-[var(--color-cta)] px-2 py-0.5 text-[0.6rem] font-bold tracking-wide text-white uppercase"
+										>Hoy</span
+									>
+								{/if}
+							</span>
 							{#if h.manana === 'Cerrado'}
-								<span class="text-[var(--color-gray-warm)] text-sm italic mt-1 sm:mt-0">
-									Cerrado
-								</span>
+								<span class="mt-1 text-sm text-[var(--color-gray-warm)] italic sm:mt-0">Cerrado</span>
 							{:else}
-								<div class="flex flex-col text-sm text-[var(--color-gray-warm)] mt-1 sm:mt-0 sm:text-right">
+								<div
+									class="mt-1 flex flex-col text-sm text-[var(--color-gray-warm)] sm:mt-0 sm:text-right"
+								>
 									<span>{h.manana}</span>
 									<span>{h.tarde}</span>
 								</div>
@@ -73,33 +68,26 @@
 					{/each}
 				</div>
 
-				<div class="mt-8 p-4 rounded-xl bg-[var(--color-cream)]">
-					<p class="text-xs text-[var(--color-gray-warm)] uppercase tracking-widest mb-1">
-						Dirección
-					</p>
-					<!-- Reemplazar con dirección exacta cuando el cliente la provea -->
+				<div class="mt-8 rounded-xl bg-[var(--color-cream)] p-5">
+					<p class="mb-1 text-xs tracking-widest text-[var(--color-gray-warm)] uppercase">Dirección</p>
 					<p class="text-sm font-semibold text-[var(--color-brown)]">
-						Las Flores, Buenos Aires, Argentina
+						Rivadavia 493, Las Flores, Provincia de Buenos Aires
 					</p>
 				</div>
 			</div>
 
 			<!-- Mapa -->
-			<div {@attach fadeUp} class="w-full md:w-1/2" style="opacity: 0;">
-				<div class="rounded-2xl overflow-hidden shadow-sm">
-					<!--
-						Reemplazar src con el embed exacto del local cuando tengamos la dirección.
-						Este embed muestra Las Flores, Buenos Aires como placeholder.
-					-->
+			<div {@attach reveal({ delay: 200 })}>
+				<div class="overflow-hidden rounded-3xl shadow-[var(--shadow-soft)]">
 					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52466.5!2d-59.1006!3d-36.0147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b9d44f0b2a7e83%3A0x408ab2ae4bb21f0!2sLas%20Flores%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1716000000000!5m2!1ses!2sar"
+						src="https://maps.google.com/maps?q=Rivadavia%20493%2C%20Las%20Flores%2C%20Buenos%20Aires&z=16&output=embed"
 						width="100%"
-						height="350"
+						height="360"
 						style="border:0;"
 						allowfullscreen
 						loading="lazy"
 						referrerpolicy="no-referrer-when-downgrade"
-						title="Ubicación Abraza Tus Sueños"
+						title="Ubicación de Abraza Tus Sueños en Las Flores"
 					></iframe>
 				</div>
 			</div>

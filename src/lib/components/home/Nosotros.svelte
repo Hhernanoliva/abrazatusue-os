@@ -1,122 +1,63 @@
 <script lang="ts">
-	import { animate } from 'animejs';
-
-	// @ts-ignore
-	const fadeUp = (el) => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					animate(el, {
-						opacity: [0, 1],
-						translateY: [30, 0],
-						duration: 700,
-						ease: 'outCubic'
-					});
-					observer.disconnect();
-				}
-			},
-			{ threshold: 0.15 }
-		);
-		observer.observe(el);
-		return () => observer.disconnect();
-	};
-
-	// @ts-ignore
-	const fadeLeft = (el) => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					animate(el, {
-						opacity: [0, 1],
-						translateX: [-30, 0],
-						duration: 800,
-						ease: 'outCubic',
-						delay: 200
-					});
-					observer.disconnect();
-				}
-			},
-			{ threshold: 0.15 }
-		);
-		observer.observe(el);
-		return () => observer.disconnect();
-	};
-
-	// @ts-ignore
-	const fadeRight = (el) => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					animate(el, {
-						opacity: [0, 1],
-						translateX: [30, 0],
-						duration: 800,
-						ease: 'outCubic',
-						delay: 300
-					});
-					observer.disconnect();
-				}
-			},
-			{ threshold: 0.15 }
-		);
-		observer.observe(el);
-		return () => observer.disconnect();
-	};
+	import { reveal } from '$lib/attachments';
+	import Figura from '$lib/components/Figura.svelte';
 </script>
 
-<section class="py-20 px-6 bg-[var(--color-cream)]">
-	<div class="max-w-6xl mx-auto">
-		<!-- Título -->
-		<div {@attach fadeUp} class="text-center mb-14">
-			<p class="text-xs font-semibold tracking-[0.3em] uppercase text-[var(--color-gray-warm)] mb-3">
-				Quiénes somos
-			</p>
-			<h2
-				class="text-3xl md:text-4xl text-[var(--color-brown)]"
-				style="font-family: var(--font-title);"
-			>
-				Un pedacito de Las Flores
-			</h2>
-		</div>
-
-		<div class="flex flex-col md:flex-row items-center gap-12">
-			<!-- Foto dueños (placeholder) -->
-			<div
-				{@attach fadeLeft}
-				class="w-full md:w-1/2"
-				style="opacity: 0;"
-			>
-				<!-- Reemplazar con <img src="/foto-duenos.jpg" alt="Los dueños de Abraza Tus Sueños" class="w-full rounded-2xl" /> -->
-				<div
-					class="w-full aspect-[4/3] rounded-2xl bg-[var(--color-blush)]/40 flex items-center justify-center"
-				>
-					<p class="text-sm text-[var(--color-gray-warm)] tracking-wide">
-						📸 Foto de los dueños
-					</p>
+<section id="nosotros" class="relative z-[2] bg-[var(--color-cream)] px-6 py-20 md:py-28">
+	<div class="mx-auto max-w-6xl">
+		<div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
+			<!-- Foto pareja — reemplazar con foto real -->
+			<div {@attach reveal({ y: 0, duration: 800 })} class="order-1">
+				<!-- Foto real: <Figura src="/duenos.jpg" alt="Estefanía y Pedro, dueños de Abraza Tus Sueños" /> -->
+				<div class="aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-[var(--shadow-soft)] md:aspect-[4/4.4]">
+					<Figura
+						src="/example-1.webp"
+						alt="Estefanía y Pedro, dueños de Abraza Tus Sueños"
+						gradient="radial-gradient(90% 70% at 30% 25%, var(--color-blush) 0%, transparent 55%), radial-gradient(90% 80% at 75% 80%, var(--color-rose-gold) 0%, transparent 55%), linear-gradient(160deg, #fbe7df 0%, #ead4c2 100%)"
+					/>
 				</div>
 			</div>
 
-			<!-- Texto -->
-			<div
-				{@attach fadeRight}
-				class="w-full md:w-1/2 text-center md:text-left"
-				style="opacity: 0;"
-			>
+			<!-- Historia -->
+			<div {@attach reveal({ y: 28, delay: 150 })} class="order-2">
 				<p
-					class="text-2xl md:text-3xl text-[var(--color-brown)] mb-6 leading-relaxed"
+					class="mb-4 text-xs font-semibold tracking-[0.3em] text-[var(--color-gray-warm)] uppercase"
+				>
+					Quiénes somos
+				</p>
+				<h2
+					class="mb-7 text-3xl leading-tight font-medium tracking-tight text-[var(--color-brown)] md:text-4xl"
+					style="font-family: var(--font-title);"
+				>
+					Dos culturas, un mismo sueño
+				</h2>
+
+				<div class="space-y-5 text-base leading-relaxed text-[var(--color-brown)]/85">
+					<p>
+						Somos Estefanía y Pedro, una pastelera argentina y un cocinero brasilero. Nos une el
+						amor por lo casero, por el buen café y por hacer las cosas de verdad. En la pandemia
+						decidimos juntar nuestras dos profesiones —y nuestros dos países— en una sola cocina.
+					</p>
+					<p>
+						De esa unión nacen recetas que no vas a encontrar en otro lado. La chipá es el ejemplo
+						más claro: tradición brasilera con cariño argentino.
+					</p>
+					<p>
+						Le pusimos Abraza Tus Sueños para no olvidarnos nunca de a lo que estamos agarrados:
+						este sueño de emprender, de cocinar para la gente, de que cada uno que entra se sienta
+						como en casa.
+					</p>
+					<p>
+						Cocinamos todo nosotros, a mano, fresco cada día. Te atendemos nosotros. Así de simple,
+						así de nuestro.
+					</p>
+				</div>
+
+				<p
+					class="mt-8 text-3xl text-[var(--color-rose-gold)]"
 					style="font-family: var(--font-brand);"
 				>
-					Hecho con amor, desde Las Flores
-				</p>
-				<p class="text-base text-[var(--color-brown)] leading-relaxed mb-4 opacity-80">
-					<!-- Placeholder copy: reemplazar con historia real de los dueños -->
-					Somos [nombres], y hace [X años] decidimos abrir las puertas de Abraza Tus Sueños
-					para compartir lo que más nos apasiona: la pastelería artesanal hecha con ingredientes
-					reales y mucho cariño.
-				</p>
-				<p class="text-base text-[var(--color-brown)] leading-relaxed opacity-80">
-					Cada tarta, cada cookie, cada café — los preparamos pensando en vos. Porque acá
-					no hay atajos, solo dedicación y amor por lo que hacemos.
+					Estefanía y Pedro
 				</p>
 			</div>
 		</div>
