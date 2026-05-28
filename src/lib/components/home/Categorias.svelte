@@ -82,90 +82,142 @@
 			</div>
 		</div>
 
-		<!-- Destacados secundarios: Cookies & Café -->
-		<div {@attach revealStagger()} class="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
+		<!-- Bento: Cookies & Café destacados + 4 categorías intercaladas
+		     Mobile: 1 col full-width. Destacados verticales (img grande arriba),
+		     secundarios horizontales (img cuadrada izq + texto der).
+		     Desktop: bento 4 cols (Cookies/Café 2x2, 4 chicas en row 3). -->
+		<div
+			{@attach revealStagger({ each: 70 })}
+			class="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-4"
+		>
+			<!-- Cookies — destacado (full mobile, 2x2 desktop) -->
 			<div
 				data-reveal-item
-				class="group rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
+				class="group flex flex-col overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3"
 			>
-				<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl rounded-b-none">
-					<!-- Foto: <Figura src="/cookies.jpg" alt="Cookies artesanales" /> -->
+				<!-- Foto: <Figura src="/cookies.jpg" alt="Cookies artesanales" /> -->
+				<div class="aspect-[16/10] w-full flex-1 overflow-hidden lg:aspect-auto lg:min-h-[280px]">
 					<Figura
 						src="/example-1.webp"
 						alt="Cookies artesanales"
 						gradient="linear-gradient(150deg, #f3c9d2 0%, var(--color-rose-gold) 100%)"
 					/>
 				</div>
-				<div class="p-8 pt-0">
+				<div class="p-6 sm:p-8">
 					<h3
-						class="mb-2 text-xl font-medium tracking-tight text-[var(--color-brown)]"
+						class="mb-2 text-2xl font-medium tracking-tight text-[var(--color-brown)] md:text-3xl"
 						style="font-family: var(--font-title);"
 					>
 						Cookies
 					</h3>
-					<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
+					<p class="text-base leading-relaxed text-[var(--color-brown)]/75">
 						Clásica, marroc, pistachio, nutella. Hechas a mano, una por una.
 					</p>
 				</div>
 			</div>
-			<div
-				data-reveal-item
-				class="group rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
-			>
-				<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl rounded-b-none">
-					<!-- Foto: <Figura src="/cafe.jpg" alt="Café de especialidad" /> -->
-					<Figura
-						src="/expample-2.webp"
-						alt="Café de especialidad"
-						gradient="linear-gradient(150deg, #d8a679 0%, var(--color-brown) 120%)"
-					/>
-				</div>
-				<div class="p-8 pt-0">
-					<h3
-						class="mb-2 text-xl font-medium tracking-tight text-[var(--color-brown)]"
-						style="font-family: var(--font-title);"
-					>
-						Café de especialidad
-					</h3>
-					<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
-						El oficio de Pedro en cada taza. Espresso, latte, cappuccino y más.
-					</p>
-				</div>
-			</div>
-		</div>
 
-		<!-- Resto de categorías -->
-		<div {@attach revealStagger({ each: 70 })} class="grid grid-cols-1 gap-5 md:grid-cols-2">
-			{#each categorias as cat, i}
+			<!-- Postres + Alfajores (entre Cookies y Café en mobile) -->
+			{#each categorias.slice(0, 2) as cat, i}
 				<div
 					data-reveal-item
-					class="group rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
+					class="group overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] lg:flex-col {i % 2 === 0
+						? 'flex flex-row'
+						: 'flex flex-row-reverse'} {i === 0
+						? 'lg:col-start-1 lg:row-start-3 lg:flex-col'
+						: 'lg:col-start-2 lg:row-start-3 lg:flex-col'}"
 				>
-					<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl rounded-b-none">
-						<!-- Foto categoría: <Figura src="/cat-xxx.jpg" alt={cat.nombre} /> -->
+					<!-- Foto: cuadrada izq mobile, full-width arriba desktop -->
+					<div class="h-32 w-32 flex-shrink-0 overflow-hidden sm:h-36 sm:w-36 lg:h-44 lg:w-full">
 						<Figura
 							src={i % 2 === 0 ? '/example-1.webp' : '/expample-2.webp'}
 							alt={cat.nombre}
 							gradient="linear-gradient(140deg, var(--color-blush) 0%, var(--color-rose-gold) 100%)"
 						/>
 					</div>
-					<div class="p-8 pt-0">
-						<div class="mb-2 flex items-center gap-2">
+					<div class="flex flex-1 flex-col justify-center p-5 lg:justify-start">
+						<div class="mb-1 flex flex-wrap items-center gap-2">
 							<h3
-								class="text-xl font-medium tracking-tight text-[var(--color-brown)]"
+								class="text-lg font-medium tracking-tight text-[var(--color-brown)]"
 								style="font-family: var(--font-title);"
 							>
 								{cat.nombre}
 							</h3>
 							{#if cat.badge}
 								<span
-									class="rounded-full bg-[var(--color-blush)]/30 px-2 py-0.5 text-[0.65rem] font-semibold tracking-wide text-[var(--color-brown)] uppercase"
+									class="rounded-full bg-[var(--color-blush)]/30 px-2 py-0.5 text-[0.6rem] font-semibold tracking-wide text-[var(--color-brown)] uppercase"
 								>
 									{cat.badge}
 								</span>
 							{/if}
 						</div>
-						<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
+						<p class="text-sm leading-relaxed text-[var(--color-brown)]/70">
+							{cat.desc}
+						</p>
+					</div>
+				</div>
+			{/each}
+
+			<!-- Café — destacado (full mobile, 2x2 desktop) -->
+			<div
+				data-reveal-item
+				class="group flex flex-col overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] lg:col-start-3 lg:col-end-5 lg:row-start-1 lg:row-end-3"
+			>
+				<!-- Foto: <Figura src="/cafe.jpg" alt="Café de especialidad" /> -->
+				<div class="aspect-[16/10] w-full flex-1 overflow-hidden lg:aspect-auto lg:min-h-[280px]">
+					<Figura
+						src="/expample-2.webp"
+						alt="Café de especialidad"
+						gradient="linear-gradient(150deg, #d8a679 0%, var(--color-brown) 120%)"
+					/>
+				</div>
+				<div class="p-6 sm:p-8">
+					<h3
+						class="mb-2 text-2xl font-medium tracking-tight text-[var(--color-brown)] md:text-3xl"
+						style="font-family: var(--font-title);"
+					>
+						Café de especialidad
+					</h3>
+					<p class="text-base leading-relaxed text-[var(--color-brown)]/75">
+						El oficio de Pedro en cada taza. Espresso, latte, cappuccino y más.
+					</p>
+				</div>
+			</div>
+
+			<!-- Salados + Bebidas (después de Café en mobile) -->
+			{#each categorias.slice(2) as cat, i}
+				<div
+					data-reveal-item
+					class="group overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] {i % 2 === 0
+						? 'flex flex-row'
+						: 'flex flex-row-reverse'} {i === 0
+						? 'lg:col-start-3 lg:row-start-3 lg:flex-col'
+						: 'lg:col-start-4 lg:row-start-3 lg:flex-col'}"
+				>
+					<!-- Foto: cuadrada izq mobile, full-width arriba desktop -->
+					<div class="h-32 w-32 flex-shrink-0 overflow-hidden sm:h-36 sm:w-36 lg:h-44 lg:w-full">
+						<Figura
+							src={i % 2 === 0 ? '/example-1.webp' : '/expample-2.webp'}
+							alt={cat.nombre}
+							gradient="linear-gradient(140deg, var(--color-blush) 0%, var(--color-rose-gold) 100%)"
+						/>
+					</div>
+					<div class="flex flex-1 flex-col justify-center p-5 lg:justify-start">
+						<div class="mb-1 flex flex-wrap items-center gap-2">
+							<h3
+								class="text-lg font-medium tracking-tight text-[var(--color-brown)]"
+								style="font-family: var(--font-title);"
+							>
+								{cat.nombre}
+							</h3>
+							{#if cat.badge}
+								<span
+									class="rounded-full bg-[var(--color-blush)]/30 px-2 py-0.5 text-[0.6rem] font-semibold tracking-wide text-[var(--color-brown)] uppercase"
+								>
+									{cat.badge}
+								</span>
+							{/if}
+						</div>
+						<p class="text-sm leading-relaxed text-[var(--color-brown)]/70">
 							{cat.desc}
 						</p>
 					</div>
