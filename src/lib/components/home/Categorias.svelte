@@ -127,7 +127,7 @@
 						: 'lg:col-start-2 lg:row-start-3 lg:flex-col'}"
 				>
 					<!-- Foto: cuadrada izq mobile, full-width arriba desktop -->
-					<div class="h-32 w-32 flex-shrink-0 overflow-hidden sm:h-36 sm:w-36 lg:h-44 lg:w-full">
+					<div class="w-32 flex-shrink-0 overflow-hidden sm:w-36 lg:h-44 lg:w-full">
 						<Figura
 							src={i % 2 === 0 ? '/example-1.webp' : '/expample-2.webp'}
 							alt={cat.nombre}
@@ -194,7 +194,7 @@
 						: 'lg:col-start-4 lg:row-start-3 lg:flex-col'}"
 				>
 					<!-- Foto: cuadrada izq mobile, full-width arriba desktop -->
-					<div class="h-32 w-32 flex-shrink-0 overflow-hidden sm:h-36 sm:w-36 lg:h-44 lg:w-full">
+					<div class="w-32 flex-shrink-0 overflow-hidden sm:w-36 lg:h-44 lg:w-full">
 						<Figura
 							src={i % 2 === 0 ? '/example-1.webp' : '/expample-2.webp'}
 							alt={cat.nombre}
