@@ -4,10 +4,10 @@
 	>
 		<div>
 			<p class="text-2xl text-[var(--color-blush)]" style="font-family: var(--font-brand);">
-				Abraza tus Sueños
+				Abraza Tus Sueños
 			</p>
 			<p class="mt-1 text-xs tracking-wide opacity-60">
-				Pastelería artesanal · Rivadavia 493, Las Flores, Buenos Aires
+				Pastelería artesanal · Av. Rivadavia 495, Las Flores, Buenos Aires
 			</p>
 		</div>
 

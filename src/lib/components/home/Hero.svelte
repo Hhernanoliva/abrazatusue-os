@@ -51,7 +51,7 @@
 		<p
 			class="mt-6 max-w-md text-base leading-relaxed text-[var(--color-brown)]/80 md:text-lg"
 		>
-			Pastelería artesanal y café en Las Flores. Todo hecho con nuestras manos, fresco del día.
+			Cafetería y pastelería artesanal en Las Flores, Buenos Aires. Todo hecho con nuestras manos, recién salido del horno.
 		</p>
 
 		<div class="mt-9 flex flex-col items-start gap-4">
@@ -66,7 +66,7 @@
 			</span>
 
 			<p class="text-sm tracking-wide text-[var(--color-gray-warm)]">
-				Rivadavia 493, Las Flores · {horarioHoy}
+				Av. Rivadavia 495, Las Flores · {horarioHoy}
 			</p>
 		</div>
 	</div>

@@ -14,7 +14,7 @@
 			Encontranos en Instagram
 		</h2>
 		<p class="mb-8 text-base leading-relaxed text-[var(--color-brown)]/75">
-			Ahí subimos lo fresco del día y el día a día de la cafetería.
+			Podes ver lo que horneamos y cocinamos en nuestras redes. El día a día de la cafetería en Las Flores.
 		</p>
 		<a
 			href="https://www.instagram.com/_abraza.tus.suenos_/"

@@ -48,8 +48,7 @@
 						como en casa.
 					</p>
 					<p>
-						Cocinamos todo nosotros, a mano, fresco cada día. Te atendemos nosotros. Así de simple,
-						así de nuestro.
+						Se hace todo acá. Los dueños te atienden de miércoles a domingo.
 					</p>
 				</div>
 

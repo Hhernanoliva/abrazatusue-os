@@ -71,7 +71,7 @@
 				<div class="mt-8 rounded-xl bg-[var(--color-cream)] p-5">
 					<p class="mb-1 text-xs tracking-widest text-[var(--color-gray-warm)] uppercase">Dirección</p>
 					<p class="text-sm font-semibold text-[var(--color-brown)]">
-						Rivadavia 493, Las Flores, Provincia de Buenos Aires
+						Av. Rivadavia 495, Las Flores, Provincia de Buenos Aires
 					</p>
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 			<div {@attach reveal({ delay: 200 })}>
 				<div class="overflow-hidden rounded-3xl shadow-[var(--shadow-soft)]">
 					<iframe
-						src="https://maps.google.com/maps?q=Rivadavia%20493%2C%20Las%20Flores%2C%20Buenos%20Aires&z=16&output=embed"
+						src="https://maps.google.com/maps?q=Rivadavia%20495%2C%20Las%20Flores%2C%20Buenos%20Aires&z=16&output=embed"
 						width="100%"
 						height="360"
 						style="border:0;"

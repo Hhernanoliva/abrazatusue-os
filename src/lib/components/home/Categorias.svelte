@@ -4,10 +4,26 @@
 
 	// Resto de categorías (sin precios, sin listar ítems con valores — visual y aspiracional).
 	const categorias = [
-		{ nombre: 'Postres', desc: 'Matilda, rogel, cheesecake, balcarce, carrot. Por porción, frescos del día.', badge: 'Por porción' },
-		{ nombre: 'Alfajores', desc: 'Maicena, coco, nuez, chocolate, frutos rojos. De los de antes.', badge: null },
-		{ nombre: 'Salados', desc: 'Croissants, tostados, chipá, avocado toast. Para cualquier momento.', badge: null },
-		{ nombre: 'Bebidas', desc: 'Café de especialidad, smoothies, jugo exprimido y clásicos.', badge: 'De especialidad' }
+		{
+			nombre: 'Postres',
+			desc: 'Matilda, rogel, cheesecake, balcarce, carrot. Por porción, frescos del día.',
+			badge: 'Por porción'
+		},
+		{
+			nombre: 'Alfajores',
+			desc: 'Maicena, coco, nuez, chocolate, frutos rojos. De los de antes.',
+			badge: null
+		},
+		{
+			nombre: 'Salados',
+			desc: 'Croissants, tostados, chipá, avocado toast. Para cualquier momento.',
+			badge: null
+		},
+		{
+			nombre: 'Bebidas',
+			desc: 'Café de especialidad, smoothies, jugo exprimido y clásicos.',
+			badge: 'De especialidad'
+		}
 	];
 </script>
 
@@ -15,14 +31,16 @@
 	<div class="mx-auto max-w-6xl">
 		<!-- Intro: el contraste genuino vs. industrial -->
 		<div {@attach reveal()} class="mx-auto mb-16 max-w-2xl text-center">
-			<p class="mb-4 text-xs font-semibold tracking-[0.3em] text-[var(--color-gray-warm)] uppercase">
+			<p
+				class="mb-4 text-xs font-semibold tracking-[0.3em] text-[var(--color-gray-warm)] uppercase"
+			>
 				Lo genuino
 			</p>
 			<h2
 				class="mb-5 text-3xl leading-tight font-medium tracking-tight text-[var(--color-brown)] md:text-4xl"
 				style="font-family: var(--font-title);"
 			>
-				El sabor real que casi no se encuentra
+				Pastelería artesanal — hecha con dedicación
 			</h2>
 			<p class="text-base leading-relaxed text-[var(--color-brown)]/75">
 				Hoy mucho se hace rápido, se abarata, se compra ya hecho. Nosotros no. Acá todo es
@@ -58,8 +76,8 @@
 				</h3>
 				<!-- PLACEHOLDER: reemplazar con descripción final de Pedro y Estefanía -->
 				<p class="text-base leading-relaxed text-[var(--color-brown)]/80">
-					La hacemos con la receta tradicional brasilera, no la que se conoce acá. Queso de
-					verdad, fresca del día. Es nuestro orgullo.
+					La hacemos con la receta tradicional brasilera, no la que se conoce acá. Queso de verdad,
+					fresca del día. Es nuestro orgullo.
 				</p>
 			</div>
 		</div>
@@ -68,39 +86,51 @@
 		<div {@attach revealStagger()} class="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
 			<div
 				data-reveal-item
-				class="group rounded-3xl bg-[var(--color-cream)] p-8 transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
+				class="group rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
 			>
-				<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl">
+				<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl rounded-b-none">
 					<!-- Foto: <Figura src="/cookies.jpg" alt="Cookies artesanales" /> -->
-					<Figura src="/example-1.webp" alt="Cookies artesanales" gradient="linear-gradient(150deg, #f3c9d2 0%, var(--color-rose-gold) 100%)" />
+					<Figura
+						src="/example-1.webp"
+						alt="Cookies artesanales"
+						gradient="linear-gradient(150deg, #f3c9d2 0%, var(--color-rose-gold) 100%)"
+					/>
 				</div>
-				<h3
-					class="mb-2 text-xl font-medium tracking-tight text-[var(--color-brown)]"
-					style="font-family: var(--font-title);"
-				>
-					Cookies
-				</h3>
-				<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
-					Clásica, marroc, pistachio, nutella. Hechas a mano, una por una.
-				</p>
+				<div class="p-8 pt-0">
+					<h3
+						class="mb-2 text-xl font-medium tracking-tight text-[var(--color-brown)]"
+						style="font-family: var(--font-title);"
+					>
+						Cookies
+					</h3>
+					<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
+						Clásica, marroc, pistachio, nutella. Hechas a mano, una por una.
+					</p>
+				</div>
 			</div>
 			<div
 				data-reveal-item
-				class="group rounded-3xl bg-[var(--color-cream)] p-8 transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
+				class="group rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
 			>
-				<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl">
+				<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl rounded-b-none">
 					<!-- Foto: <Figura src="/cafe.jpg" alt="Café de especialidad" /> -->
-					<Figura src="/expample-2.webp" alt="Café de especialidad" gradient="linear-gradient(150deg, #d8a679 0%, var(--color-brown) 120%)" />
+					<Figura
+						src="/expample-2.webp"
+						alt="Café de especialidad"
+						gradient="linear-gradient(150deg, #d8a679 0%, var(--color-brown) 120%)"
+					/>
 				</div>
-				<h3
-					class="mb-2 text-xl font-medium tracking-tight text-[var(--color-brown)]"
-					style="font-family: var(--font-title);"
-				>
-					Café de especialidad
-				</h3>
-				<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
-					El oficio de Pedro en cada taza. Espresso, latte, cappuccino y más.
-				</p>
+				<div class="p-8 pt-0">
+					<h3
+						class="mb-2 text-xl font-medium tracking-tight text-[var(--color-brown)]"
+						style="font-family: var(--font-title);"
+					>
+						Café de especialidad
+					</h3>
+					<p class="text-sm leading-relaxed text-[var(--color-brown)]/75">
+						El oficio de Pedro en cada taza. Espresso, latte, cappuccino y más.
+					</p>
+				</div>
 			</div>
 		</div>
 
@@ -109,20 +139,20 @@
 			{#each categorias as cat, i}
 				<div
 					data-reveal-item
-					class="flex items-center gap-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-white-soft)] p-5 transition-all duration-300 hover:border-[var(--color-rose-gold)] hover:shadow-[var(--shadow-soft)]"
+					class="group rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)]"
 				>
-					<!-- Foto categoría: <Figura src="/cat-xxx.jpg" alt={cat.nombre} /> -->
-					<div class="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl">
+					<div class="mb-5 aspect-[3/2] w-full overflow-hidden rounded-2xl rounded-b-none">
+						<!-- Foto categoría: <Figura src="/cat-xxx.jpg" alt={cat.nombre} /> -->
 						<Figura
 							src={i % 2 === 0 ? '/example-1.webp' : '/expample-2.webp'}
 							alt={cat.nombre}
 							gradient="linear-gradient(140deg, var(--color-blush) 0%, var(--color-rose-gold) 100%)"
 						/>
 					</div>
-					<div class="min-w-0">
-						<div class="mb-1 flex items-center gap-2">
+					<div class="p-8 pt-0">
+						<div class="mb-2 flex items-center gap-2">
 							<h3
-								class="text-lg font-medium tracking-tight text-[var(--color-brown)]"
+								class="text-xl font-medium tracking-tight text-[var(--color-brown)]"
 								style="font-family: var(--font-title);"
 							>
 								{cat.nombre}
