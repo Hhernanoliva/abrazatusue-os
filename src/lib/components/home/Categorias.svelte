@@ -77,7 +77,7 @@
 				<!-- PLACEHOLDER: reemplazar con descripción final de Pedro y Estefanía -->
 				<p class="text-base leading-relaxed text-[var(--color-brown)]/80">
 					La hacemos con la receta tradicional brasilera, no la que se conoce acá. Queso de verdad,
-					fresca del día. Es nuestro orgullo.
+					fresca del día. Es nuestro orgullo. =)
 				</p>
 			</div>
 		</div>
@@ -120,7 +120,9 @@
 			{#each categorias.slice(0, 2) as cat, i}
 				<div
 					data-reveal-item
-					class="group overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] lg:flex-col {i % 2 === 0
+					class="group overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] lg:flex-col {i %
+						2 ===
+					0
 						? 'flex flex-row'
 						: 'flex flex-row-reverse'} {i === 0
 						? 'lg:col-start-1 lg:row-start-3 lg:flex-col'
@@ -187,7 +189,9 @@
 			{#each categorias.slice(2) as cat, i}
 				<div
 					data-reveal-item
-					class="group overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] {i % 2 === 0
+					class="group overflow-hidden rounded-3xl bg-[var(--color-cream)] transition-shadow duration-300 hover:shadow-[var(--shadow-soft)] {i %
+						2 ===
+					0
 						? 'flex flex-row'
 						: 'flex flex-row-reverse'} {i === 0
 						? 'lg:col-start-3 lg:row-start-3 lg:flex-col'
